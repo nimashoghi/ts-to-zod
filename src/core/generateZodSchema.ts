@@ -206,6 +206,9 @@ function buildZodPrimitive({
 
   if (ts.isTypeReferenceNode(typeNode) && ts.isIdentifier(typeNode.typeName)) {
     const identifierName = typeNode.typeName.text;
+    if (identifierName === "Date") {
+      return buildZodSchema(z, "date", [], zodProperties);
+    }
 
     // Deal with `Array<>` syntax
     if (identifierName === "Array" && typeNode.typeArguments) {
